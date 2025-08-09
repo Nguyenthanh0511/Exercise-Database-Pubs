@@ -1,0 +1,61 @@
+SQL SERVER ON UBUNTU - QUICK REFERENCE
+=====================================
+
+CONNECTION INFO:
+Server: localhost
+Port: 1433
+Username: SA
+Password: StrongP@ssw0rd123!
+Database: pubs
+
+BASIC COMMANDS:
+# Start SQL Server
+sudo docker start mssql
+
+# Stop SQL Server
+sudo docker stop mssql
+
+# Connect to SQL Server
+sqlcmd -S localhost -U SA -P 'StrongP@ssw0rd123!' -C
+
+# Connect to pubs database
+sqlcmd -S localhost -U SA -P 'StrongP@ssw0rd123!' -C -d pubs
+
+# Run a query
+sqlcmd -S localhost -U SA -P 'StrongP@ssw0rd123!' -C -d pubs -Q "SELECT * FROM authors;"
+
+# Execute a script
+sqlcmd -S localhost -U SA -P 'StrongP@ssw0rd123!' -C -i script.sql
+
+USEFUL QUERIES:
+# List all databases
+SELECT name FROM sys.databases;
+
+# List all tables in current database
+SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
+
+# Show table structure
+SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'authors';
+
+TROUBLESHOOTING:
+# Check container status
+sudo docker ps
+
+# View container logs
+sudo docker logs mssql
+
+# Restart container if needed
+sudo docker restart mssql
+
+TABLES IN PUBS DATABASE:
+- authors (author information)
+- titles (book information)
+- publishers (publisher details)
+- sales (sales transactions)
+- stores (store information)
+- employee (employee records)
+- jobs (job descriptions)
+- titleauthor (author-title relationships)
+- roysched (royalty schedules)
+- discounts (discount information)
+- pub_info (publisher details)
